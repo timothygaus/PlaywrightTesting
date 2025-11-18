@@ -49,7 +49,6 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: authFile
       },
-      dependencies: ['setup']
     },
 
     // {

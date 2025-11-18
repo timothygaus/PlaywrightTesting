@@ -12,7 +12,6 @@ setup('log in as standard user', async ({ page }) => {
     await expect(page).toHaveURL(/.*inventory/)
 
     const cookies = await page.context().cookies()
-    console.log('Cookies after login:', cookies)
 
     await page.context().storageState({ path: authFile })
 })
