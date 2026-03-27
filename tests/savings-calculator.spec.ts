@@ -1,8 +1,5 @@
 import test, { expect } from "@playwright/test"
 import { ContributionFrequency, SavingsCalculatorPage } from "../pages/SavingsCalculatorPage"
-import { exec } from "child_process"
-import { addListener } from "process"
-import { isAwaitKeyword } from "typescript"
 
 test.describe('Savings Calculator', () => {
     let calculatorPage: SavingsCalculatorPage
@@ -52,7 +49,7 @@ test.describe('Savings Calculator', () => {
         await calculatorPage.fillStartingBalance('100000000')
         await calculatorPage.fillApy('1000')
         await calculatorPage.fillAdditionalContribution('100000000')
-        await calculatorPage.fillAdditionalContribution(ContributionFrequency.SemiMonthly)
+        await calculatorPage.selectContributionFrequency(ContributionFrequency.SemiMonthly)
         await calculatorPage.fillYearsToSave('30')
         await calculatorPage.clickCalculateButton()
         await expect(calculatorPage.savingsBalanceResult).not.toBeEmpty()
@@ -66,7 +63,7 @@ test.describe('Savings Calculator', () => {
         await expect(calculatorPage.savingsBalanceResult).toHaveText('$--')
     })
 
-    test('maximum boundarys with errors', async () => {
+    test('maximum boundaries with errors', async () => {
         await calculatorPage.fillStartingBalance('100000001')
         await calculatorPage.fillApy('1001')
         await calculatorPage.fillAdditionalContribution('100000001')
